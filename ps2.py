@@ -59,10 +59,10 @@ for i in range(0,len(msg)+1):
 	if i in i1:
 		msg_list[i]=b1[p]
 		p+=1
-	elif i in index2:
+	elif i in i2:
 		msg_list[i]=b2[q]
 		q+=1
-	elif i in index3:
+	elif i in i3:
 		msg_list[i]=b3[r]
 		r+=1	
 

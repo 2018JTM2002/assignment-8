@@ -54,6 +54,39 @@ Note: The two crosses cannot overlap, and the dimensions of each of the valid cr
 
 \end{itemize}
 
+\subsection{Program structure}
+
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, ]
+
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, ]
+
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, ]
+
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black,]
+
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+
+\begin{tikzpicture}[node distance=2.5cm]
+
+\node (start) [startstop] {Start};
+\node (in1) [io, below of=start] {values of rows an columns are made input from the user};
+\node (pro1) [process, below of=in1] {scanning};
+
+\node (pro2a) [process, below of=pro1] {using loops and determining the pattern};
+
+\node (stop) [startstop,below of=pro2a] {Stop};
+
+\draw [arrow] (start) -- (in1);
+\draw [arrow] (in1) -- (pro1);
+\draw [arrow] (pro1) -- (pro2a);
+
+\draw [arrow] (pro2a) -- (stop);
+\end{tikzpicture}
+
 
 \subsection{Input and Output format}
 \begin{itemize}
@@ -96,7 +129,7 @@ DSSSDDDDD\\
 
 \subsection{Screenshots}
 
-
+\includegraphics[scale=0.35]{Screenshot1.png}
 
 \section{Problem Statement 2}
 \subsection{Problem Statement}
@@ -165,11 +198,36 @@ Sample Output:  hardworkis\textunderscore the\textunderscore key\textunderscore 
 
 
 \begin{lstlisting}[style=CStyle]
-#include <stdio.h>
-int main(void)
-{
-   printf("Hello World!"); 
-}
+n=int(input("enter the value of rows n :"))
+m=int(input("enter the value of coloumn m:"))
+patt = []
+
+#creating a array to take the inputs
+for i in range(n):
+        t = list(input())
+        patt = patt + [t]
+print(patt)
+
+#running a loop to compare elements
+for i in range(n):
+        for j in range(m):
+                #print(i,j,patt[i][j])
+
+                if patt[i][j]=='S'and patt[i][j+1]=='S' and patt[i][j-1]=='S': # comparision of characters for finding a pattern of 9 S
+                        if patt[i+1][j]=='S'and patt[i+1][j-1]=='D' and patt[i+1][j+1]=='D': #comparision of next column to find the pattern
+                                if patt[i+2][j-2]=='S' and patt[i+2][j+2]=='S' and  patt[i+2][j+1]=='S' and patt[i+2][j-1]=='S'and patt[i+2][j]=='S': #comparision in the next row and about the same column against its previous and next column 
+                                        if patt[i+3][j]=='S'and patt[i+3][j-1]=='D' and patt[i+3][j+1]=='D':#moving to next row and trying to correlate the pattern 
+                                                if patt[i+4][j]=='S'and patt[i+4][j+1]=='S' and patt[i+4][j-1]=='S':   
+                                                        print("9")
+
+                elif patt[i][j]=='S' and patt[i][j-1]=='D' and patt[i][j+1]=='D' and i<=n-1 : #similarly trying to correlate the pattern regarding 5 S
+                        if patt[i+1][j]=='S' and patt[i+1][j+1]=='S' and patt[i+1][j-1]=='S':
+                                if patt[i+2][j]=='S' and patt[i][j-1]=='D'and patt[i][j+1]=='D':
+                                                print("5")
+                elif patt[i][j]=='S' and patt[i][j-1]=='D' and patt[i][j+1]=='D' and i<=n-1 :# similarly trying tyo correlate the pattern regarding 1 S
+                        if patt[i+1][j]=='D'and patt[i+1][j-1]=='D' and patt[i+1][j+1]=='D':
+                                if patt[i+2][j]=='D'and patt[i+2][j-1]=='D' and patt[i+2][j+1]=='D':
+                                        print("1")
 \end{lstlisting}
 
 \newpage
@@ -278,6 +336,8 @@ for i in msg_list[:]:
 
 print("")
 \end{lstlisting}
-\bibliographystyle{plain}
+
+\nocite{*}
+\bibliographystyle{amplain}
 \bibliography{assign8.bib}
 \end{document}
