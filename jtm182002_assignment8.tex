@@ -1,0 +1,266 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{geometry}
+\usepackage{amssymb}
+
+
+\begin{document}
+\begin{center}
+\textbf{Assignment-8 \\
+\vspace{5mm}
+ELP - 718 Telecom Software Laboratory \\
+\vspace{2mm}
+Shivaji Roy \\
+2018JTM2002 \\
+2018-2020} \\
+\vspace{10mm}
+A report presented for the assignment-8 \\
+\vspace{30mm}
+\includegraphics[scale=0.5]{iitlogo} \\
+\vspace{10mm}
+Bharti School Of \\
+Telecommunication Technology and Management \\
+IIT Delhi \\
+India \\
+September 27, 2018
+
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+\section{Objective}
+To develop our logical skills to solve the given problem with the help of basic C syntax.
+\section{Problem Statement 1}
+A Bus Conductor gains profit if the number of passengers are more than  k, and it starts the bus at a fixed time and  if the no. of passenger at the start time is less than k,he cancels the trip and wait for the next departure time.
+Given the arrival time of each passenger, determine the profit of the given ride. Assume that it earns Rs.100 per passenger.
+\subsection{Input Format}
+Each test case consist of two lines.The first line has two space separated integers, N(incoming passenger for the ride) and k(The cancellation Threshold).The second line contains N space separated integers(a1, a2, a3… an) describing the arrival time of each passenger.\\
+\subsection*{Constraints}
+\begin{itemize}
+\item $1 \leqslant N \leqslant 10$
+\item $1 \leqslant K \leqslant N$
+\item $-100 \leqslant a_i \leqslant 100$
+\item $1 \leqslant i \leqslant N$
+\end{itemize}
+\subsection{Program structure}
+
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, ]
+
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, ]
+
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, ]
+
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black,]
+
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+
+\begin{tikzpicture}[node distance=2.5cm]
+
+\node (start) [startstop] {Start};
+\node (in1) [io, below of=start] {Input};
+\node (pro1) [process, below of=in1] {what is the name of the story};
+\node (dec1) [decision, below of=pro1] {$x>y$};
+\node (pro2a) [process, below of=dec1, yshift=-0.5cm] {Process 2a};
+\node (pro2b) [process, right of=dec1, xshift=2cm] {Process 2b};
+\node (out1) [io, below of=pro2a] {Output};
+\node (stop) [startstop, below of=out1] {Stop};
+
+\draw [arrow] (start) -- (in1);
+\draw [arrow] (in1) -- (pro1);
+\draw [arrow] (pro1) -- (dec1);
+\draw [arrow] (dec1) -- (pro2a);
+\draw [arrow] (dec1) -- (pro2b);
+\draw [arrow] (dec1) -- node[anchor=east] {yes} (pro2a);
+\draw [arrow] (dec1) -- node[anchor=south] {no} (pro2b);
+
+\draw [arrow] (pro2b) |- (in1);
+\draw [arrow] (pro2a) -- (out1);
+\draw [arrow] (out1) -- (stop);
+\end{tikzpicture}
+\subsection{Algorithm and Implementation}
+\begin{itemize}
+\item Created ps1.c file for writing the program.
+\item Take input N an k from user. take arriving values from user.
+\item Check if the number of commutators arriving before the departure of Bus are more or equal to threshold value.
+\item Start the Bus iff Passengers are above the threshold value.
+\item Count the number of passengers and Calculate profit.
+\end{itemize}
+\subsection{Input and Output format}
+\begin{itemize}
+\item \textbf{Input format} \\
+Input is given by the user. Non-positive arrival times ($a_i \leqslant$ 0) indicates that the passenger arrives early on time; positive arrival time ($a_i \geqslant$ 0) indicates that passenger arrived minute late.
+\item \textbf{Output format}\\
+Print the profit in rupees.\\
+\end{itemize}
+\subsection{Test Cases}
+\textbf{Sample Input1}\\
+4 3 \\
+-1 -3 2 4 \\
+\textbf{Sample Output1} \\
+0\\
+\textbf{Sample Input1} \\
+5 2 \\
+-1 -3 -2 4 3 \\
+\textbf{Sample Output1} \\
+300 \\
+
+\subsection{Difficulties/Issues Faced}
+\begin{itemize}
+\item Error code compiling.
+\item Code blocks IDE was getting Hanged and ceased to respond.
+
+\end{itemize}
+\subsection{Screenshots}
+
+\includegraphics[scale=0.35]{Screenshotfromassignment2_ps1.png}
+
+\section{Problem Statement 2}
+\subsection{Problem Statement}
+There is a prime date in an year and there would be high rate of ticket bookings near to this date. The airline service decide to increment the fair based on some calculation scheme:
+\begin{itemize}
+\item Base Price =4000
+\item Base price = 4000
+\item If difference is more than 3 months then no extra prime booking charges.
+\item Check for the prime date range, If difference is less than 3 months  say m month and d days then charges : { 12/(m+1) + d/30 }\% of base price
+\item Convenience charges = 12\% of base price.
+\item GST = 30\% of base price. 
+\end{itemize}
+
+\subsection{Algorithm and Implementation}
+\begin{itemize}
+\item Take prime date as well as travel date from user as a command line argument.
+\item Calculate difference between them.
+\item If the difference is less than 3 months the Calculate prime charges percent and in turn the actual value.
+\item Calculate total price including convinience charges, GST and Prime(if applicable)
+\item Display the final ticket price to user.
+\end{itemize}
+\subsection{Input Output Format}
+\begin{itemize}
+\item \textbf{Input format} \\
+Input is prime date and travel date given as command line argument.\\
+\item \textbf{Output format}\\
+Output shows the final travelling fare. \\
+\end{itemize}
+\subsection{Test Case}
+Sample Input:  ./ps1 10 08 2018 10 07 2018
+Sample Output:  5920.00
+
+\subsection{Difficulties/Isseus Faced}
+\begin{itemize}
+\item Error in code compiling.
+\item Error while giving inputs through Terminal.
+\end{itemize}
+\subsection{Screenshots}
+\begin{figure}
+
+\caption{Input Output through Terminal}
+\end{figure}
+\begin{figure}
+\includegraphics[scale=0.3]{Screenshotfromassignment2_ps2.png}
+\caption{writing c code in gedit editor}
+\end{figure}
+
+
+\section{Problem Statement 3 \cite{reference}} 
+Write a program to implement a Packet compression scheme.
+\subsubsection*{How It works}
+From the large stream of bits,check for the consecutive blocks of 0 and 1.write the block size .For example ({15,1},{19,0},{4,1}) in figure below.Here 15 refers to block size of 1’s and 19 block size of 0’s.Calculate the binary equivalent of these block sizes .Check for maximum block size like here 19 is maximum ,so 5 bits at least required to represent the digit. After getting the number of bits required,calculate the binary equivalent of the block size with N bits (for example (01111 represents 15 in the figure)).
+Find the total number of bits required to represent the entire codeword.Divide that total number by the code length for calculating Compression ratio.
+\begin{figure}[h]
+
+\end{figure}
+\subsection{Input Format}
+\begin{itemize}
+\item \textbf{Input format} \\
+Input is a string of one zero bits where we have to \\
+\item \textbf{Output format}\\
+Output shows the final travelling fare. \\
+\end{itemize}
+\section{Appendix}
+\subsection{Appendix-A : code for ps1}
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+
+
+
+\begin{lstlisting}[style=CStyle]
+#include <stdio.h>
+int main(void)
+{
+   printf("Hello World!"); 
+}
+\end{lstlisting}
+
+\newpage
+\subsection{Appendix-B : code for ps2}
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+
+
+
+\begin{lstlisting}[style=CStyle]
+#include <stdio.h>
+int main(void)
+{
+   printf("Hello World!"); 
+}
+\end{lstlisting}
+\bibliographystyle{plain}
+\bibliography{assign8.bib}
+\end{document}
